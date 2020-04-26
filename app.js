@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyparser = require('body-parser');
 const nocache = require('nocache');
-
+const path = require('path')
 
 
 const app = express();
@@ -15,12 +15,14 @@ console.log(`NODE_ENV: ${app.get('env')}`);
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+const distPath = path.join(__dirname, './build/');
 
 //Adding middleware
 
 app.use(cors());
 // app.use(bodyparser.json({ limit: '50mb', extended: true }));
 app.use(bodyparser.urlencoded({ extended: false }))
+app.use(express.static(distPath));
 
 
 app.use(nocache());
