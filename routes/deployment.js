@@ -10,7 +10,7 @@ const moment = require('moment');
 
 
 
-// Register new task
+// Register new deployment
 router.post('/add', (req, res) => {
     // console.log(req, "ttt", req.query);
     
@@ -25,16 +25,13 @@ router.post('/add', (req, res) => {
             .then((saved) => {
                 console.log('saved');
                 
-                res.status(200).json('')
+                res.status(200).json({msg: 'saved successfully'})
 
             })
             .catch(err => {
                 console.log(err);
-                let responseObj = {
-                    "response_type": "in_channel",
-                    "text": "Not saved"
-                }
-                res.status(400).json(responseObj)
+                
+                res.status(400).json({msg : 'Error occurred'})
             })
     } catch (err) {
         console.log(err);
@@ -80,10 +77,10 @@ router.get('/all', async (req, res) => {
 router.delete('/delete/:id',async(req,res)=>{
     try {
         let deleteDep = await Deployment.findByIdAndDelete(req.params.id);
-        res.status(200).json('Deleted successfully');
+        res.status(200).json({msg :'Deleted successfully'});
     } catch (e){
         console.log(e);
-        res.status(200).json('Error occurred');
+        res.status(200).json({msg :'Error occurred'});
     }
 })
 
