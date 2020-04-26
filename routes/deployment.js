@@ -4,6 +4,7 @@ const _ = require('lodash');
 const async = require('async');
 var multer = require('multer');
 const Deployment = require('../models/deployment');
+const moment = require('moment');
 
 
 
@@ -56,10 +57,14 @@ router.post('/add', (req, res) => {
 router.get('/all', async (req, res) => {
     // console.log(req.body)
     try {
-        let deployments = await Deployment.find({});
+        let deployments = await Deployment.find({}).lean();
         console.log(deployments,"tt")
         if (deployments.length !=0) {
-            res.status(200).json(deployments);
+            let changedDate = deployments.map((a)=>{
+                a.deployedAt =  moment(a.deployedAt).format('DD-MM-YYYY');
+                return a;
+            })
+            res.status(200).json(changedDate);
         } else {
             
             res.status(200).json('No deployment found');
