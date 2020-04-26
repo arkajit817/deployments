@@ -20,7 +20,7 @@ router.post('/add', (req, res) => {
             version: req.body.version,
             deployedAt : new Date()
         })
-        newTodo.save()
+        newDeployment.save()
             .then((saved) => {
                 console.log('saved');
                 

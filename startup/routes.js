@@ -3,6 +3,6 @@ const deployment = require('../routes/deployment');
 
 
 module.exports = function (app) {
-    app.use('/api/adddeployment', deployment);
+    app.use('/api/deployment', deployment);
 }
 

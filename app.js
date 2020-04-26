@@ -20,8 +20,8 @@ const distPath = path.join(__dirname, './build/');
 //Adding middleware
 
 app.use(cors());
-// app.use(bodyparser.json({ limit: '50mb', extended: true }));
-app.use(bodyparser.urlencoded({ extended: false }))
+app.use(bodyparser.json({ limit: '50mb', extended: true }));
+// app.use(bodyparser.urlencoded({ extended: false }))
 app.use(express.static(distPath));
 
 
